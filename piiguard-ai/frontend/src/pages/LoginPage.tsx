@@ -68,9 +68,11 @@ export function LoginPage({ onLogin, onRegister, redirectTo = '/dashboard' }: Lo
       }
       navigate(redirectTo)
     } catch (err: unknown) {
-      // Extract error message from API response
+      // Extract error message from API response or native error
       let message = isRegister ? 'Registration failed. Please try again.' : 'Incorrect email or password.'
-      if (err && typeof err === 'object' && 'response' in err) {
+      if (err instanceof Error) {
+        message = err.message
+      } else if (err && typeof err === 'object' && 'response' in err) {
         const axiosErr = err as { response?: { data?: { error?: string }; status?: number } }
         if (axiosErr.response?.data?.error) {
           message = axiosErr.response.data.error
