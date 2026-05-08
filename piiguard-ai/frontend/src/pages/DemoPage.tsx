@@ -52,6 +52,7 @@ export function DemoPage() {
   const handleSignOut = () => {
     localStorage.removeItem('piiguard_token')
     localStorage.removeItem('piiguard_user')
+    window.dispatchEvent(new Event('piiguard_auth_change'))
     navigate('/')
   }
 

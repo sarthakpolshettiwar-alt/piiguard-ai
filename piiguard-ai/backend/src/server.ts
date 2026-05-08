@@ -41,21 +41,42 @@ async function start() {
       console.warn('⚠️  PostgreSQL connection failed — some features will be limited')
     }
 
-    server.listen(env.PORT, () => {
+    let currentPort = env.PORT
+
+    server.on('error', (err: any) => {
+      if (err.code === 'EADDRINUSE') {
+        console.warn(`⚠️  Port ${currentPort} is occupied.`)
+        if (env.NODE_ENV !== 'production') {
+          currentPort++
+          console.log(`🔄 Trying next available port: ${currentPort}...`)
+          server.listen(currentPort)
+        } else {
+          console.error('❌ In production, cannot fallback to another port. Exiting.')
+          process.exit(1)
+        }
+      } else {
+        console.error('❌ Server startup failed:', err)
+        process.exit(1)
+      }
+    })
+
+    server.on('listening', () => {
       console.log(`
 ╔══════════════════════════════════════════════════╗
 ║         🛡️  PIIGuard AI Backend Server          ║
 ╠══════════════════════════════════════════════════╣
-║  Port:        ${String(env.PORT).padEnd(35)}║
+║  Port:        ${String(currentPort).padEnd(35)}║
 ║  Environment: ${env.NODE_ENV.padEnd(35)}║
-║  API:         http://localhost:${env.PORT}/api${' '.repeat(13)}║
-║  Health:      http://localhost:${env.PORT}/api/health${' '.repeat(6)}║
+║  API:         http://localhost:${currentPort}/api${' '.repeat(Math.max(0, 13 - (currentPort.toString().length - 4)))}║
+║  Health:      http://localhost:${currentPort}/api/health${' '.repeat(Math.max(0, 6 - (currentPort.toString().length - 4)))}║
 ║  Socket.IO:   Enabled${' '.repeat(27)}║
 ╚══════════════════════════════════════════════════╝
       `)
     })
+
+    server.listen(currentPort)
   } catch (err) {
-    console.error('❌ Server startup failed:', err)
+    console.error('❌ Server initialization failed:', err)
     process.exit(1)
   }
 }
