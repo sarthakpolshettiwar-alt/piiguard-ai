@@ -187,7 +187,7 @@ router.post('/forgot-password', validate(forgotPasswordSchema), async (req: Requ
 
     // In a real application, send this token via email here.
     // For this demonstration, we'll return it so the frontend can display it or log it.
-    console.log(`[DEMO] Password reset link generated: http://localhost:5173/reset-password?token=${resetToken}`)
+    console.log(`[DEMO] Password reset link generated: ${env.CORS_ORIGIN}/reset-password?token=${resetToken}`)
 
     await prisma.auditLog.create({
       data: { userId: user.id, action: 'FORGOT_PASSWORD', resource: '/api/auth/forgot-password', ipAddress: req.ip },

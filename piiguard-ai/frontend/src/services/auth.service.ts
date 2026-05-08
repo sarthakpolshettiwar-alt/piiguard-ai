@@ -45,8 +45,8 @@ export const authService = {
 
     // 2. Construct redirectTo URL including the backend token
     const redirectTo = devToken
-      ? `http://localhost:5173/reset-password?token=${devToken}`
-      : 'http://localhost:5173/reset-password'
+      ? `${window.location.origin}/reset-password?token=${devToken}`
+      : `${window.location.origin}/reset-password`
 
     // 3. Send reset password email via Supabase
     const { error: sbError } = await supabase.auth.resetPasswordForEmail(email, {

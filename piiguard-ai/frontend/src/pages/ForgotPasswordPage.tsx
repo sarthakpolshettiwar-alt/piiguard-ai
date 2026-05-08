@@ -75,7 +75,7 @@ export function ForgotPasswordPage() {
                   <div className="text-xs text-emerald-300 bg-emerald-950/50 p-2 rounded border border-emerald-500/20 break-all">
                     <span className="font-semibold block mb-1">Demo Mode - Reset Link:</span>
                     <a href={`/reset-password?token=${devToken}`} className="underline hover:text-emerald-200">
-                      http://localhost:5173/reset-password?token={devToken}
+                      {window.location.origin}/reset-password?token={devToken}
                     </a>
                   </div>
                 )}
