@@ -1,0 +1,14 @@
+[build]
+  base    = "piiguard-ai/frontend"
+  command = "npm install --include=dev && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NPM_FLAGS = "--include=dev"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options        = "DENY"
+    X-XSS-Protection       = "1; mode=block"
