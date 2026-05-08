@@ -1,198 +1,207 @@
-[README.md](https://github.com/user-attachments/files/27517221/README.md)
 <div align="center">
+
+<img src="https://img.shields.io/badge/PIIGuard-AI-00d4ff?style=for-the-badge&logo=shield&logoColor=white" alt="PIIGuard AI" />
 
 # 🛡️ PIIGuard AI
 
 ### *Privacy-First AI Security Infrastructure Platform*
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
-[![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://supabase.com/)
-[![Redis](https://img.shields.io/badge/Redis-Upstash-DC382D?style=for-the-badge&logo=redis&logoColor=white)](https://upstash.com/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
+> **Detect. Tokenize. Protect.** — Secure your AI workflows before sensitive data ever reaches your LLM.
 
----
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://reactjs.org)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat-square&logo=postgresql&logoColor=white)](https://postgresql.org)
+[![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)](https://redis.io)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com)
+[![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=flat-square&logo=Prisma&logoColor=white)](https://prisma.io)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-**Detect. Tokenize. Secure.**
-*Enterprise-grade PII protection layer for AI pipelines — before sensitive data ever reaches an LLM.*
+<br />
 
-[Features](#-features) • [Architecture](#-system-architecture) • [Installation](#-installation) • [API](#-api-overview) • [Contributing](#-contributing)
+![PIIGuard Hero](./screenshots/hero.png)
 
 </div>
 
 ---
 
-## 📖 Overview
+## 📋 Table of Contents
 
-**PIIGuard AI** is a production-grade, privacy-first security infrastructure platform designed to intercept, detect, and neutralize Personally Identifiable Information (PII) before it reaches any AI system or Large Language Model (LLM).
+- [Overview](#-overview)
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Tech Stack](#-tech-stack)
+- [System Architecture](#-system-architecture)
+- [Folder Structure](#-folder-structure)
+- [Installation Guide](#-installation-guide)
+- [Environment Variables](#-environment-variables)
+- [Running Locally](#-running-locally)
+- [Authentication Flow](#-authentication-flow)
+- [Tokenization Workflow](#-tokenization-workflow)
+- [History Feature](#-history-feature)
+- [Security Features](#-security-features)
+- [API Overview](#-api-overview)
+- [Future Improvements](#-future-improvements)
+- [Deployment](#-deployment)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Author](#-author)
 
-In a world where AI usage is accelerating across every industry, the accidental leakage of sensitive data — names, emails, phone numbers, social security numbers, financial identifiers — into AI systems represents a critical compliance and privacy risk. PIIGuard AI solves this problem at the infrastructure level.
+---
 
-By sitting between your users and your AI backend, PIIGuard AI:
+## 🔍 Overview
 
-- 🔍 **Detects** PII in real-time using intelligent pattern recognition
-- 🔑 **Tokenizes** sensitive values into reversible, encrypted placeholders
-- 🔒 **Stores** encrypted mappings securely in a tamper-resistant data layer
-- 📋 **Returns** sanitized prompts safe for AI consumption
-- 📝 **Tracks** full prompt history for audit trails and compliance
+**PIIGuard AI** is a production-grade, privacy-first AI security infrastructure platform designed to intercept, detect, and neutralize Personally Identifiable Information (PII) *before* it reaches any Large Language Model (LLM) or downstream AI system.
 
-This platform is built for developers, security engineers, and compliance teams who need a reliable, scalable, and developer-friendly solution to protect sensitive user data in AI-powered applications.
+In a world where developers and enterprises integrate AI into sensitive workflows daily, accidental PII exposure to third-party AI APIs poses a critical compliance and security risk. PIIGuard AI solves this by acting as a **secure middleware layer** — sitting between your application and your AI, ensuring zero sensitive data leakage.
+
+### 🎯 Who Is This For?
+
+| Audience | Use Case |
+|---|---|
+| **Enterprises** | Ensure GDPR / HIPAA compliance in AI pipelines |
+| **Developers** | Protect user data when calling GPT, Claude, Gemini, etc. |
+| **Security Teams** | Audit and monitor PII exposure in real-time |
+| **Startups** | Ship privacy-compliant AI features from day one |
 
 ---
 
 ## ✨ Features
 
-### 🔐 Security & Privacy
-| Feature | Description |
-|---|---|
-| **Real-time PII Detection** | Identify PII patterns (emails, phone numbers, SSNs, credit cards, names, addresses) in submitted prompts instantly |
-| **PII Tokenization** | Replace detected PII with cryptographically unique tokens, preserving prompt structure |
-| **AES Encryption** | All token-to-PII mappings are encrypted at rest using AES before storage |
-| **JWT Authentication** | Stateless, secure API access with signed JSON Web Tokens |
-| **Protected Routes** | Frontend routes and backend endpoints are fully protected; unauthenticated access is blocked |
+### 🔐 Core Security
+- **Real-time PII Detection** — Scans input text and identifies emails, phone numbers, SSNs, names, addresses, and more with high accuracy
+- **PII Tokenization Engine** — Replaces detected PII with unique cryptographic tokens (e.g., `john@acme.com` → `[TOKEN_EMAIL_a1b2c3]`)
+- **AES Encryption** — All token-to-PII mappings are encrypted at rest using industry-standard AES encryption
+- **Zero-Trust Architecture** — Sensitive data never persists in plaintext; only encrypted mappings are stored
 
-### 🧠 AI Pipeline Protection
-| Feature | Description |
-|---|---|
-| **Secure Prompt Processing** | Sanitized prompts are returned for safe downstream AI consumption |
-| **Prompt History Tracking** | Every processed prompt is logged with metadata for review and audit |
-| **Token Vault** | Encrypted mappings stored in PostgreSQL via Prisma ORM for durability |
-| **Redis Caching** | Upstash Redis provides fast ephemeral token lookups and session support |
+### 👤 Authentication & Access
+- **Supabase Authentication** — Secure signup, login, and session management
+- **JWT-Protected Routes** — All API endpoints require valid JWT tokens
+- **Forgot / Reset Password Flow** — Full email-based password recovery
+- **Protected Frontend Routes** — Unauthenticated users cannot access the dashboard
 
-### 🖥️ Platform & UX
-| Feature | Description |
-|---|---|
-| **Cybersecurity-Themed UI** | Dark, professional UI built with TailwindCSS for a security-first aesthetic |
-| **Authentication System** | Full sign-up, login, and session management powered by Supabase Auth |
-| **Forgot/Reset Password** | Secure password reset flow with email-based verification |
-| **Settings Page** | User preference and account management interface |
-| **Copy-to-Clipboard** | One-click copying of sanitized prompts and token results |
+### 📊 Dashboard & UX
+- **Interactive PII Detection Demo** — Paste any text and watch tokenization happen in real-time
+- **Tokenization History** — Per-user log of all past tokenization requests with original and sanitized output
+- **Copy-to-Clipboard** — One-click copy for both original and tokenized outputs
+- **Settings Page** — User preferences and account management
+- **Cybersecurity-Themed UI** — Dark, terminal-inspired aesthetic built with TailwindCSS
+
+### ⚡ Infrastructure
+- **Redis (Upstash)** — Ultra-fast token caching and rate limiting layer
+- **PostgreSQL (Supabase)** — Durable, relational storage for users, history, and encrypted token mappings
+- **Prisma ORM** — Type-safe database access with automatic migrations
+- **Vite + React** — Blazing-fast frontend with TypeScript for type safety end-to-end
 
 ---
 
 ## 📸 Screenshots
 
-> 📌 *Screenshots coming soon — replace placeholders below with actual images.*
+> *Screenshots of the live application*
 
-```
-screenshots/
-├── dashboard.png        # Main dashboard with prompt input
-├── pii-detection.png    # Real-time PII detection in action
-├── token-output.png     # Tokenized output view
-├── history.png          # Prompt history log
-├── settings.png         # Settings page
-└── login.png            # Authentication screen
-```
+### 🏠 Landing Page
+![Landing Page](./screenshots/landing.png)
+*Privacy-first hero section with live code preview demonstrating the tokenization API*
 
-| Dashboard | PII Detection |
-|---|---|
-| ![Dashboard](screenshots/dashboard.png) | ![Detection](screenshots/pii-detection.png) |
+### 🔐 Authentication — Sign Up
+![Sign Up](./screenshots/signup.png)
+*Clean, dark-themed authentication flow powered by Supabase*
 
-| Token Output | Prompt History |
-|---|---|
-| ![Token Output](screenshots/token-output.png) | ![History](screenshots/history.png) |
+### 🧪 Interactive PII Detection Demo
+![Demo](./screenshots/demo.png)
+*Real-time PII detection: input text on the left, tokenized output on the right with labeled detections*
+
+### 📜 Tokenization History
+![History](./screenshots/history.png)
+*Per-user audit trail of all tokenization requests with timestamps and copy functionality*
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠 Tech Stack
 
 ### Frontend
 | Technology | Purpose |
 |---|---|
-| [React 18](https://react.dev/) | UI component framework |
-| [Vite](https://vitejs.dev/) | Next-generation frontend build tool |
-| [TypeScript](https://www.typescriptlang.org/) | Static typing for reliability |
-| [TailwindCSS](https://tailwindcss.com/) | Utility-first CSS for cybersecurity-themed UI |
+| **React 18** | Component-based UI framework |
+| **Vite** | Lightning-fast build tool and dev server |
+| **TypeScript** | Static typing for maintainability |
+| **TailwindCSS** | Utility-first CSS framework |
 
 ### Backend
 | Technology | Purpose |
 |---|---|
-| [Node.js](https://nodejs.org/) | JavaScript runtime |
-| [Express](https://expressjs.com/) | Lightweight HTTP server framework |
-| [TypeScript](https://www.typescriptlang.org/) | Type-safe backend development |
+| **Node.js** | JavaScript runtime for the API server |
+| **Express** | Minimal, flexible HTTP framework |
+| **TypeScript** | Type-safe server-side code |
 
-### Data & Storage
+### Database & Storage
 | Technology | Purpose |
 |---|---|
-| [PostgreSQL (Supabase)](https://supabase.com/) | Primary relational database for users, tokens, and history |
-| [Prisma ORM](https://www.prisma.io/) | Type-safe database access and schema migrations |
-| [Redis (Upstash)](https://upstash.com/) | Serverless Redis for caching and ephemeral token storage |
+| **PostgreSQL (Supabase)** | Primary relational database |
+| **Prisma ORM** | Type-safe database client & migration tool |
+| **Redis (Upstash)** | Token cache, session store, rate limiting |
 
 ### Auth & Security
 | Technology | Purpose |
 |---|---|
-| [Supabase Auth](https://supabase.com/docs/guides/auth) | Authentication, session management, password reset |
-| [AES Encryption](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) | Symmetric encryption for stored PII token mappings |
-| [JWT](https://jwt.io/) | API authentication tokens |
+| **Supabase Auth** | User authentication & session management |
+| **JWT** | Stateless API authorization |
+| **AES Encryption** | Encrypting PII-token mappings at rest |
 
 ---
 
-## 🏗️ System Architecture
+## 🏗 System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        CLIENT (React + Vite)                    │
+│                        CLIENT (Browser)                         │
+│              React + Vite + TypeScript + TailwindCSS            │
+└──────────────────────────┬──────────────────────────────────────┘
+                           │  HTTPS Requests (JWT in Header)
+                           ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                     EXPRESS API SERVER                          │
+│                   Node.js + TypeScript                          │
 │                                                                 │
-│   ┌──────────────┐    ┌──────────────┐    ┌──────────────────┐ │
-│   │  Auth Pages  │    │   Dashboard  │    │  History/Settings│ │
-│   └──────┬───────┘    └──────┬───────┘    └────────┬─────────┘ │
-└──────────┼───────────────────┼─────────────────────┼───────────┘
-           │                   │                     │
-           ▼                   ▼                     ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    SUPABASE AUTH                                 │
-│               (JWT Tokens · Session Management)                 │
-└─────────────────────────────┬───────────────────────────────────┘
-                              │ Authenticated Requests (JWT)
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                  BACKEND API (Express + Node.js)                 │
-│                                                                 │
-│   ┌──────────────────────────────────────────────────────────┐  │
-│   │               PII Detection Engine                       │  │
-│   │   (Regex Patterns · Named Entity Recognition · Rules)    │  │
-│   └──────────────────────────┬───────────────────────────────┘  │
-│                              │                                  │
-│   ┌──────────────────────────▼───────────────────────────────┐  │
-│   │               Tokenization Engine                        │  │
-│   │         (UUID Tokens · AES Encrypted Mappings)           │  │
-│   └──────────┬─────────────────────────────┬─────────────────┘  │
-│              │                             │                     │
-└──────────────┼─────────────────────────────┼────────────────────┘
-               │                             │
-               ▼                             ▼
-┌──────────────────────┐         ┌────────────────────────┐
-│   PostgreSQL         │         │   Upstash Redis         │
-│   (via Supabase)     │         │   (Serverless Cache)    │
-│                      │         │                         │
-│ • users              │         │ • ephemeral tokens      │
-│ • token_mappings     │         │ • session cache         │
-│ • prompt_history     │         │ • rate limiting         │
-│ • settings           │         │                         │
-└──────────────────────┘         └────────────────────────┘
-         ▲
-         │ Prisma ORM
-         │ (Type-safe queries · Migrations)
-         │
-┌────────┴──────────────────────┐
-│         Prisma Schema         │
-│   (schema.prisma — source     │
-│    of truth for DB structure) │
-└───────────────────────────────┘
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
+│  │  Auth Routes │  │  PII Routes  │  │   History Routes     │  │
+│  │  /auth/*     │  │  /api/pii/*  │  │   /api/history/*     │  │
+│  └──────────────┘  └──────┬───────┘  └──────────────────────┘  │
+│                           │                                     │
+│                  ┌────────▼────────┐                            │
+│                  │  PII Detection  │                            │
+│                  │    Engine       │                            │
+│                  │  (Regex + NLP)  │                            │
+│                  └────────┬────────┘                            │
+│                           │                                     │
+│                  ┌────────▼────────┐                            │
+│                  │  Tokenization   │                            │
+│                  │    Service      │                            │
+│                  │  (AES Encrypt)  │                            │
+│                  └────────┬────────┘                            │
+└───────────────────────────┼─────────────────────────────────────┘
+                            │
+          ┌─────────────────┼──────────────────┐
+          ▼                 ▼                  ▼
+┌─────────────────┐ ┌──────────────┐ ┌────────────────┐
+│   PostgreSQL    │ │    Redis     │ │  Supabase Auth │
+│   (Supabase)   │ │  (Upstash)   │ │                │
+│                 │ │              │ │  - JWT Tokens  │
+│  - Users        │ │  - Token     │ │  - Sessions    │
+│  - History      │ │    Cache     │ │  - Email Flow  │
+│  - Encrypted    │ │  - Rate      │ └────────────────┘
+│    Mappings     │ │    Limiting  │
+└─────────────────┘ └──────────────┘
 ```
 
-### Data Flow Summary
+### Privacy-First Data Flow
 
 ```
-User Prompt ──► PII Detection ──► Tokenization ──► Encrypted Storage
-                                       │
-                                       ▼
-                              Sanitized Prompt ──► AI System (Safe)
-                                       │
-                                       ▼
-                              History Logged ──► Audit Trail
+User Input ──► PII Detection ──► Tokenization ──► Encrypted Storage
+                                      │
+                                      ▼
+                              Sanitized Output ──► Safe for LLM ✅
 ```
 
 ---
@@ -201,56 +210,52 @@ User Prompt ──► PII Detection ──► Tokenization ──► Encrypted S
 
 ```
 piiguard-ai/
-│
-├── frontend/                        # React + Vite + TypeScript frontend
-│   ├── public/                      # Static assets
+├── frontend/                     # React + Vite frontend
+│   ├── public/
 │   ├── src/
-│   │   ├── assets/                  # Images, icons, fonts
-│   │   ├── components/              # Reusable UI components
-│   │   │   ├── auth/                # Login, Register, ForgotPassword
-│   │   │   ├── dashboard/           # Main prompt interface
-│   │   │   ├── history/             # Prompt history view
-│   │   │   ├── settings/            # Settings page
-│   │   │   └── shared/              # Navbar, Layout, Protected routes
-│   │   ├── hooks/                   # Custom React hooks
-│   │   ├── lib/                     # Supabase client, API helpers
-│   │   ├── pages/                   # Top-level page components
-│   │   ├── types/                   # TypeScript interfaces & types
-│   │   ├── App.tsx                  # Root component with routing
-│   │   └── main.tsx                 # Entry point
-│   ├── .env                         # Frontend environment variables
+│   │   ├── assets/               # Static assets
+│   │   ├── components/           # Reusable UI components
+│   │   │   ├── Navbar.tsx
+│   │   │   ├── ProtectedRoute.tsx
+│   │   │   └── ...
+│   │   ├── pages/                # Route-level page components
+│   │   │   ├── Landing.tsx
+│   │   │   ├── Login.tsx
+│   │   │   ├── Signup.tsx
+│   │   │   ├── Demo.tsx
+│   │   │   ├── History.tsx
+│   │   │   ├── Settings.tsx
+│   │   │   └── ForgotPassword.tsx
+│   │   ├── lib/                  # Supabase client, API helpers
+│   │   ├── hooks/                # Custom React hooks
+│   │   ├── App.tsx
+│   │   └── main.tsx
+│   ├── .env.local
 │   ├── index.html
 │   ├── tailwind.config.ts
 │   ├── tsconfig.json
 │   └── vite.config.ts
 │
-├── backend/                         # Express + Node.js + TypeScript API
+├── backend/                      # Express API server
 │   ├── src/
-│   │   ├── controllers/             # Route handler logic
-│   │   │   ├── auth.controller.ts
-│   │   │   ├── pii.controller.ts
-│   │   │   └── history.controller.ts
-│   │   ├── middleware/              # JWT auth, error handling, validation
-│   │   │   ├── auth.middleware.ts
-│   │   │   └── error.middleware.ts
-│   │   ├── routes/                  # Express route definitions
-│   │   │   ├── auth.routes.ts
-│   │   │   ├── pii.routes.ts
-│   │   │   └── history.routes.ts
-│   │   ├── services/                # Business logic
-│   │   │   ├── pii.service.ts       # PII detection engine
-│   │   │   ├── tokenizer.service.ts # Tokenization & encryption
-│   │   │   ├── redis.service.ts     # Upstash Redis integration
-│   │   │   └── history.service.ts   # Prompt history management
-│   │   ├── lib/                     # Prisma client, Redis client
-│   │   ├── types/                   # Shared TypeScript types
-│   │   └── index.ts                 # Express app entry point
-│   ├── prisma/
-│   │   ├── schema.prisma            # Database schema definition
-│   │   └── migrations/              # Auto-generated Prisma migrations
-│   ├── .env                         # Backend environment variables
-│   ├── tsconfig.json
-│   └── package.json
+│   │   ├── routes/               # Express route handlers
+│   │   │   ├── auth.ts
+│   │   │   ├── pii.ts
+│   │   │   └── history.ts
+│   │   ├── services/             # Core business logic
+│   │   │   ├── piiDetector.ts    # PII detection engine
+│   │   │   ├── tokenizer.ts      # Tokenization service
+│   │   │   ├── encryption.ts     # AES encrypt/decrypt
+│   │   │   └── redis.ts          # Upstash Redis client
+│   │   ├── middleware/           # Auth & validation middleware
+│   │   │   ├── authMiddleware.ts
+│   │   │   └── errorHandler.ts
+│   │   ├── prisma/
+│   │   │   └── schema.prisma     # Database schema
+│   │   └── index.ts              # Server entry point
+│   ├── .env
+│   ├── package.json
+│   └── tsconfig.json
 │
 ├── .gitignore
 ├── README.md
@@ -259,16 +264,18 @@ piiguard-ai/
 
 ---
 
-## 🚀 Installation
+## 🚀 Installation Guide
 
 ### Prerequisites
 
 Ensure you have the following installed:
 
-- **Node.js** >= 18.x
-- **npm** >= 9.x or **yarn**
-- A **Supabase** project (free tier works)
-- An **Upstash Redis** database (free tier works)
+- **Node.js** `>= 18.x`
+- **npm** or **yarn**
+- **PostgreSQL** database (or a [Supabase](https://supabase.com) project)
+- **Redis** instance (or an [Upstash](https://upstash.com) Redis database)
+
+---
 
 ### 1. Clone the Repository
 
@@ -276,6 +283,8 @@ Ensure you have the following installed:
 git clone https://github.com/sarthakpolshettiwar/piiguard-ai.git
 cd piiguard-ai
 ```
+
+---
 
 ### 2. Frontend Setup
 
@@ -287,9 +296,10 @@ npm install
 Copy the environment template and fill in your values:
 
 ```bash
-cp .env.example .env
-# Edit .env with your Supabase credentials and API URL
+cp .env.example .env.local
 ```
+
+---
 
 ### 3. Backend Setup
 
@@ -302,425 +312,433 @@ Copy the environment template and fill in your values:
 
 ```bash
 cp .env.example .env
-# Edit .env with your database URL, Redis credentials, and secrets
 ```
 
-### 4. Database Setup (Prisma Migration)
+---
 
-With your `DATABASE_URL` set in `/backend/.env`, run:
+### 4. Prisma Migration
+
+Run database migrations to set up all tables:
 
 ```bash
 cd backend
-npx prisma generate       # Generate Prisma client
-npx prisma migrate dev    # Apply migrations to your database
+npx prisma generate
+npx prisma migrate dev --name init
 ```
 
-To view your database visually:
+To view your database in Prisma Studio:
 
 ```bash
 npx prisma studio
 ```
 
+---
+
 ### 5. Redis Setup (Upstash)
 
-1. Go to [console.upstash.com](https://console.upstash.com/) and create a new Redis database
-2. Copy the **REST URL** and **REST Token** from the dashboard
-3. Add them to your `/backend/.env` file
-
-### 6. Supabase Auth Setup
-
-1. Go to your [Supabase project dashboard](https://app.supabase.com/)
-2. Navigate to **Authentication → Providers** and ensure Email is enabled
-3. Under **Authentication → URL Configuration**, add your frontend URL to the redirect allowlist
-4. Copy your **Project URL** and **Anon Key** from **Settings → API**
+1. Create a free account at [upstash.com](https://upstash.com)
+2. Create a new **Redis** database
+3. Copy the `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` from the dashboard
+4. Paste them into your backend `.env` file
 
 ---
 
 ## 🔧 Environment Variables
 
-### Frontend (`frontend/.env`)
+### Frontend (`frontend/.env.local`)
 
 ```env
-# Supabase configuration
-VITE_SUPABASE_URL=https://your-project-id.supabase.co
+# Supabase
+VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
 
-# Backend API URL
-VITE_API_URL=http://localhost:4000
+# Backend API
+VITE_API_URL=http://localhost:3001
 ```
 
 ### Backend (`backend/.env`)
 
 ```env
 # PostgreSQL via Supabase
-DATABASE_URL=postgresql://postgres:[password]@db.[project-id].supabase.co:5432/postgres
+DATABASE_URL=postgresql://postgres:[password]@db.[project].supabase.co:5432/postgres
 
-# Upstash Redis (Serverless)
-UPSTASH_REDIS_REST_URL=https://your-redis-endpoint.upstash.io
-UPSTASH_REDIS_REST_TOKEN=your-upstash-redis-token
+# Upstash Redis
+UPSTASH_REDIS_REST_URL=https://your-redis.upstash.io
+UPSTASH_REDIS_REST_TOKEN=your-upstash-token
 
 # Security
-JWT_SECRET=your-super-secret-jwt-key-minimum-32-characters
-SECRET_KEY=your-aes-encryption-secret-key-32-characters
+JWT_SECRET=your-super-secret-jwt-key-min-32-chars
+SECRET_KEY=your-aes-encryption-key-32-chars
 ```
 
-> ⚠️ **Security Notice:** Never commit `.env` files to version control. Use `.env.example` files with placeholder values as templates.
+> ⚠️ **Never commit `.env` files to version control.** All secrets must be kept out of your repository.
 
 ---
 
-## 🖥️ Running Locally
+## ▶️ Running Locally
 
-Start the backend server:
+### Start the Backend Server
 
 ```bash
 cd backend
 npm run dev
-# Backend API running at http://localhost:4000
 ```
 
-In a separate terminal, start the frontend dev server:
+The API server will start at `http://localhost:3001`
+
+### Start the Frontend Dev Server
 
 ```bash
 cd frontend
 npm run dev
-# Frontend running at http://localhost:5173
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+The frontend will be available at `http://localhost:5173`
+
+### Build for Production
+
+```bash
+# Frontend
+cd frontend && npm run build
+
+# Backend
+cd backend && npm run build && npm start
+```
 
 ---
 
 ## 🔑 Authentication Flow
 
-PIIGuard AI uses **Supabase Auth** for full user lifecycle management, with JWT-based API protection on the backend.
+PIIGuard AI uses **Supabase Auth** for identity management with JWT-based API protection.
 
 ```
-┌─────────┐        ┌──────────────┐        ┌────────────┐
-│  User   │        │ Supabase Auth│        │  Backend   │
-└────┬────┘        └──────┬───────┘        └─────┬──────┘
-     │                    │                      │
-     │  Sign Up / Login   │                      │
-     │──────────────────► │                      │
-     │                    │                      │
-     │  JWT Access Token  │                      │
-     │ ◄────────────────  │                      │
-     │                    │                      │
-     │  API Request + JWT Bearer Token           │
-     │──────────────────────────────────────────►│
-     │                    │                      │
-     │                    │  Verify JWT Signature │
-     │                    │ ◄─────────────────── │
-     │                    │                      │
-     │  Protected Response│                      │
-     │ ◄────────────────────────────────────────-│
+┌──────────┐     1. Sign Up / Login      ┌──────────────┐
+│  Client  │ ──────────────────────────► │  Supabase    │
+│          │ ◄────────────────────────── │  Auth        │
+└──────────┘     2. JWT Access Token     └──────────────┘
+     │
+     │  3. API Request + Bearer Token
+     ▼
+┌──────────────────┐
+│  Express Backend │  ──► Validates JWT ──► Processes Request
+└──────────────────┘
 ```
 
-### Key Authentication Features
+### Supported Auth Actions
 
-- **Signup/Login** — Supabase handles credential storage and session creation
-- **JWT Verification** — Every protected backend route validates the JWT from the Authorization header
-- **Password Reset** — Email-based magic link reset flow, handled through Supabase Auth
-- **Session Persistence** — Supabase client SDK manages token refresh automatically
-- **Protected Frontend Routes** — React Router guards redirect unauthenticated users to login
+| Action | Endpoint | Description |
+|---|---|---|
+| Sign Up | `/auth/signup` | Register with email + password |
+| Sign In | `/auth/signin` | Login and receive JWT |
+| Sign Out | `/auth/signout` | Invalidate current session |
+| Forgot Password | `/auth/forgot-password` | Send password reset email |
+| Reset Password | `/auth/reset-password` | Set new password via reset link |
+
+### Protected Routes (Frontend)
+
+All dashboard routes are wrapped with a `<ProtectedRoute />` component that validates the active Supabase session. Unauthenticated users are automatically redirected to `/login`.
+
+```tsx
+<Route
+  path="/demo"
+  element={
+    <ProtectedRoute>
+      <Demo />
+    </ProtectedRoute>
+  }
+/>
+```
 
 ---
 
 ## 🔄 Tokenization Workflow
 
-The core of PIIGuard AI is a multi-stage PII sanitization pipeline designed for security and reversibility.
+This is the core of PIIGuard AI — a multi-step security pipeline that sanitizes any text before it can reach an LLM.
 
 ```
-╔══════════════════════════════════════════════════════════════╗
-║                  TOKENIZATION PIPELINE                       ║
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-║  1. USER SUBMITS PROMPT                                      ║
-║     "Please help John Doe at john@example.com, SSN 123-45"  ║
-║                              │                               ║
-║                              ▼                               ║
-║  2. PII DETECTION ENGINE                                     ║
-║     ┌─────────────────────────────────────┐                  ║
-║     │ Detected:                           │                  ║
-║     │  • NAME:  "John Doe"                │                  ║
-║     │  • EMAIL: "john@example.com"        │                  ║
-║     │  • SSN:   "123-45-..."              │                  ║
-║     └─────────────────────────────────────┘                  ║
-║                              │                               ║
-║                              ▼                               ║
-║  3. TOKENIZATION                                             ║
-║     ┌─────────────────────────────────────────────────────┐  ║
-║     │ "John Doe"          → [TOKEN_a8f2c1d4]              │  ║
-║     │ "john@example.com"  → [TOKEN_9e3b7f22]              │  ║
-║     │ "123-45-..."        → [TOKEN_c1d56a90]              │  ║
-║     └─────────────────────────────────────────────────────┘  ║
-║                              │                               ║
-║                              ▼                               ║
-║  4. ENCRYPTED STORAGE                                        ║
-║     AES-encrypt token↔value mappings                         ║
-║     Persist to PostgreSQL (Prisma) + Redis cache             ║
-║                              │                               ║
-║                              ▼                               ║
-║  5. SANITIZED PROMPT RETURNED                                ║
-║     "Please help [TOKEN_a8f2c1d4] at [TOKEN_9e3b7f22]..."   ║
-║                              │                               ║
-║                              ▼                               ║
-║  6. HISTORY SAVED                                            ║
-║     Original metadata + sanitized version logged with        ║
-║     timestamp, user ID, PII type count                       ║
-║                              │                               ║
-║                              ▼                               ║
-║  7. SECURE AI WORKFLOW                                       ║
-║     Sanitized prompt forwarded to AI system — zero PII       ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
+Step 1: User Submits Prompt
+─────────────────────────────────────────────────────
+  Input: "Please contact john@acme.com or call 555-123-4567"
+
+
+Step 2: PII Detection Engine Scans Input
+─────────────────────────────────────────────────────
+  Detected:
+  ├── EMAIL  → john@acme.com
+  └── PHONE  → 555-123-4567
+
+
+Step 3: Tokenization — PII Replaced with Secure Tokens
+─────────────────────────────────────────────────────
+  Mapping:
+  ├── [TOKEN_EMAIL_a1b2c3] → john@acme.com
+  └── [TOKEN_PHONE_d4e5f6] → 555-123-4567
+
+
+Step 4: Encrypted Mapping Stored Securely
+─────────────────────────────────────────────────────
+  ├── Redis  → Token cache (fast lookup, TTL-based)
+  └── PostgreSQL → Encrypted persistent mapping
+
+
+Step 5: Sanitized Prompt Returned to Client
+─────────────────────────────────────────────────────
+  Output: "Please contact [TOKEN_EMAIL_a1b2c3] or call [TOKEN_PHONE_d4e5f6]"
+
+
+Step 6: History Record Saved
+─────────────────────────────────────────────────────
+  Stored: { userId, originalPrompt, tokenizedOutput, detections, timestamp }
+
+
+Step 7: Safe AI Workflow Maintained ✅
+─────────────────────────────────────────────────────
+  → Sanitized prompt is now safe to pass to any LLM API
 ```
 
-### PII Types Detected
+### Supported PII Types
 
-| Category | Examples |
-|---|---|
-| **Email Address** | `john@example.com` |
-| **Phone Number** | `+1-555-123-4567`, `(555) 123-4567` |
-| **Social Security Number** | `123-45-6789` |
-| **Credit Card Number** | `4111 1111 1111 1111` |
-| **Full Name** | `John Doe`, `Dr. Jane Smith` |
-| **Date of Birth** | `01/15/1990`, `January 15, 1990` |
-| **Physical Address** | `123 Main Street, New York, NY 10001` |
-| **IP Address** | `192.168.1.1` |
+| Type | Example | Token Format |
+|---|---|---|
+| Email Address | `john@acme.com` | `[TOKEN_EMAIL_xxxxx]` |
+| Phone Number | `555-123-4567` | `[TOKEN_PHONE_xxxxx]` |
+| Social Security Number | `123-45-6789` | `[TOKEN_SSN_xxxxx]` |
+| Credit Card | `4111 1111 1111 1111` | `[TOKEN_CC_xxxxx]` |
+| Full Name | `John Doe` | `[TOKEN_NAME_xxxxx]` |
+| IP Address | `192.168.1.1` | `[TOKEN_IP_xxxxx]` |
+| Date of Birth | `01/15/1990` | `[TOKEN_DOB_xxxxx]` |
 
 ---
 
-## 📋 History Feature
+## 📜 History Feature
 
-Every prompt processed through PIIGuard AI is automatically logged to provide:
+Every authenticated user has a personal **Tokenization History** — a full audit trail of all tokenization requests.
 
-- **Audit Trail** — Full record of when prompts were processed and by whom
-- **PII Summary** — Count and types of PII detected per prompt
-- **Before/After View** — Original prompt context vs. sanitized version
-- **Timestamp Metadata** — UTC timestamps for compliance record-keeping
-- **User-Scoped History** — Each user can only access their own prompt history
+### What Gets Stored
 
-History records are stored in PostgreSQL via Prisma and can be reviewed from the History page in the dashboard. Sensitive raw PII is never stored — only token references and PII type metadata are logged.
+```json
+{
+  "id": "uuid",
+  "userId": "user-uuid",
+  "originalPrompt": "Contact john@acme.com or call 555-123-4567",
+  "tokenizedOutput": "Contact [TOKEN_EMAIL_z42n9w] or call [TOKEN_PHONE_kfmlle]",
+  "detections": [
+    { "type": "email", "value": "john@acme.com" },
+    { "type": "phone", "value": "555-123-4567" }
+  ],
+  "createdAt": "2026-05-08T17:24:44.000Z"
+}
+```
+
+### Features
+
+- 📋 **Side-by-side view** — Original prompt alongside tokenized output
+- 📅 **Timestamp** — Exact date and time of each request
+- 📋 **Copy button** — One-click clipboard copy for both versions
+- 🔒 **User-scoped** — Each user only sees their own history
 
 ---
 
 ## 🔒 Security Features
 
-### Defense in Depth
+PIIGuard AI is built with a **security-first** mindset at every layer of the stack.
 
-PIIGuard AI implements multiple layers of security:
+### Encryption at Rest
+All PII-to-token mappings are encrypted using **AES (Advanced Encryption Standard)** before being written to the database. The encryption key is stored as an environment variable and never hardcoded.
 
-```
-Layer 1: Authentication Gate
-  └── Supabase Auth · JWT Token Verification · Protected Routes
+### JWT Authentication
+Every API request to the Express backend must include a valid **Bearer token** in the `Authorization` header. Tokens are issued by Supabase and validated server-side on each request.
 
-Layer 2: Transport Security
-  └── HTTPS Enforced · Secure Headers · CORS Configuration
+### Input Validation & Sanitization
+All incoming request bodies are validated and sanitized before processing, preventing injection attacks and malformed data from reaching the detection engine.
 
-Layer 3: Data-at-Rest Encryption
-  └── AES Encryption on all PII token mappings before storage
+### Rate Limiting via Redis
+Upstash Redis is used to enforce **per-user rate limits**, preventing abuse and brute-force attacks on the tokenization endpoint.
 
-Layer 4: Database Security
-  └── Prisma parameterized queries (SQL injection prevention)
-  └── Row-level isolation by user ID
+### Protected Routes
+The frontend enforces route-level authentication. Any attempt to access `/demo`, `/history`, or `/settings` without a valid session results in an immediate redirect to `/login`.
 
-Layer 5: Secret Management
-  └── Environment variable isolation · No secrets in source code
-```
-
-### Encryption Details
-
-| Component | Method | Notes |
-|---|---|---|
-| PII Token Mappings | AES-256 | Encrypted before writing to PostgreSQL |
-| API Communication | JWT (RS256/HS256) | Signed tokens, verified on every request |
-| Password Storage | Supabase Auth (bcrypt) | Managed by Supabase Auth infrastructure |
-| Redis Cache Entries | Encrypted values | Token data encrypted before caching |
+### Zero Plaintext Storage
+The system is designed so that **no PII is ever stored in plaintext**. Original prompts in history are stored for audit purposes under the user's own account but the sensitive tokens are always encrypted.
 
 ---
 
 ## 📡 API Overview
 
-All API endpoints are prefixed with `/api/v1` and require a valid `Authorization: Bearer <JWT>` header unless marked as public.
+Base URL: `http://localhost:3001`
 
 ### Authentication
 
-| Method | Endpoint | Access | Description |
+| Method | Endpoint | Auth Required | Description |
 |---|---|---|---|
-| `POST` | `/api/v1/auth/register` | Public | Register a new user |
-| `POST` | `/api/v1/auth/login` | Public | Login and receive JWT |
-| `POST` | `/api/v1/auth/forgot-password` | Public | Trigger password reset email |
-| `POST` | `/api/v1/auth/reset-password` | Public | Set new password with reset token |
-| `GET` | `/api/v1/auth/me` | Protected | Get current user profile |
+| `POST` | `/auth/signup` | ❌ | Register a new user |
+| `POST` | `/auth/signin` | ❌ | Sign in and receive JWT |
+| `POST` | `/auth/signout` | ✅ | Sign out current user |
+| `POST` | `/auth/forgot-password` | ❌ | Trigger password reset email |
 
-### PII Processing
+### PII Tokenization
 
-| Method | Endpoint | Access | Description |
+| Method | Endpoint | Auth Required | Description |
 |---|---|---|---|
-| `POST` | `/api/v1/pii/process` | Protected | Submit prompt for PII detection and tokenization |
-| `POST` | `/api/v1/pii/detokenize` | Protected | Reverse tokens back to original PII values |
-| `GET` | `/api/v1/pii/types` | Protected | List all supported PII detection types |
+| `POST` | `/api/pii/tokenize` | ✅ | Tokenize PII in submitted text |
+| `POST` | `/api/pii/detect` | ✅ | Detect PII without tokenizing |
 
-### Prompt History
+### History
 
-| Method | Endpoint | Access | Description |
+| Method | Endpoint | Auth Required | Description |
 |---|---|---|---|
-| `GET` | `/api/v1/history` | Protected | Fetch paginated prompt history for current user |
-| `GET` | `/api/v1/history/:id` | Protected | Fetch a single history record by ID |
-| `DELETE` | `/api/v1/history/:id` | Protected | Delete a specific history record |
-| `DELETE` | `/api/v1/history` | Protected | Clear all history for current user |
+| `GET` | `/api/history` | ✅ | Get all history for current user |
+| `DELETE` | `/api/history/:id` | ✅ | Delete a specific history record |
 
-### Settings
+### Request / Response Example
 
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/v1/settings` | Protected | Fetch user settings |
-| `PATCH` | `/api/v1/settings` | Protected | Update user settings |
-
-### Example Request — Process Prompt
-
-```bash
-curl -X POST https://your-api-url/api/v1/pii/process \
-  -H "Authorization: Bearer <your-jwt-token>" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "prompt": "Please send a report to Jane Smith at jane.smith@corp.com, her phone is 555-987-6543"
-  }'
-```
-
-**Response:**
+**`POST /api/pii/tokenize`**
 
 ```json
+// Request Body
 {
-  "success": true,
-  "sanitizedPrompt": "Please send a report to [TOKEN_d4f1a092] at [TOKEN_88c3e710], her phone is [TOKEN_f2b9c441]",
-  "detectedPII": [
-    { "type": "NAME", "token": "TOKEN_d4f1a092" },
-    { "type": "EMAIL", "token": "TOKEN_88c3e710" },
-    { "type": "PHONE", "token": "TOKEN_f2b9c441" }
+  "text": "Contact john.doe@acme.com or call 555-123-4567 for support."
+}
+
+// Response
+{
+  "tokenizedText": "Contact [TOKEN_EMAIL_u5pz7j] or call [TOKEN_PHONE_yiwak1] for support.",
+  "detections": [
+    { "type": "email", "original": "john.doe@acme.com", "token": "TOKEN_EMAIL_u5pz7j" },
+    { "type": "phone", "original": "555-123-4567", "token": "TOKEN_PHONE_yiwak1" }
   ],
-  "piiCount": 3,
-  "historyId": "clx8f2k9m0000abc123"
+  "detectionCount": 2
 }
 ```
 
 ---
 
-## 🚀 Future Improvements
+## 🔮 Future Improvements
 
 | Feature | Priority | Description |
 |---|---|---|
-| **LLM Integration** | 🔴 High | Direct integration with OpenAI, Anthropic, and Gemini APIs for end-to-end secure prompting |
-| **Detokenization API** | 🔴 High | Reverse-tokenize AI responses to restore original values in the output |
-| **Named Entity Recognition** | 🟡 Medium | ML-based NER for higher accuracy detection beyond regex patterns |
-| **Compliance Reports** | 🟡 Medium | GDPR/HIPAA/CCPA-ready audit report exports (PDF/CSV) |
-| **Webhook Support** | 🟡 Medium | Event-driven notifications when PII is detected above threshold |
-| **Team/Organization Mode** | 🟡 Medium | Multi-user workspaces with role-based access control |
-| **SDK / npm Package** | 🟢 Low | Publish `@piiguard/client` SDK for easy integration into any JavaScript app |
-| **PII Scoring** | 🟢 Low | Risk scoring per prompt based on type and count of PII detected |
-| **Data Residency Controls** | 🟢 Low | Region-specific storage for data sovereignty compliance |
+| 🤖 **LLM Proxy Mode** | High | Act as a transparent proxy to OpenAI/Anthropic APIs |
+| 🔁 **De-tokenization API** | High | Reverse tokens back to original PII for authorized users |
+| 📊 **Analytics Dashboard** | Medium | Charts and insights on PII detection trends |
+| 🌍 **Internationalization** | Medium | Support for non-English PII patterns |
+| 🔌 **SDK / npm Package** | High | `npm install piiguard` for easy integration |
+| 📧 **Webhook Alerts** | Medium | Notify teams when high-risk PII is detected |
+| 🏢 **Team / Org Accounts** | High | Multi-user workspaces with role-based access |
+| 📋 **Compliance Reports** | Medium | Auto-generate GDPR/HIPAA compliance reports |
+| 🧠 **ML-Based Detection** | High | Replace regex with fine-tuned NLP model for higher accuracy |
 
 ---
 
-## 🌐 Deployment
+## 🚢 Deployment
 
-### Frontend — Vercel
+### Frontend → Vercel
 
-1. Import your repository at [vercel.com/new](https://vercel.com/new)
-2. Set the **Root Directory** to `frontend`
-3. Add environment variables:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_ANON_KEY`
-   - `VITE_API_URL` (your deployed backend URL)
-4. Deploy — Vercel auto-detects Vite and configures the build
+1. Push the `frontend/` directory to GitHub
+2. Import the repo at [vercel.com](https://vercel.com)
+3. Set the **root directory** to `frontend`
+4. Add all `VITE_*` environment variables in the Vercel dashboard
+5. Deploy — Vercel auto-detects Vite and builds correctly
 
-### Backend — Railway or Render
+```bash
+# Or deploy via CLI
+npm i -g vercel
+cd frontend && vercel --prod
+```
+
+### Backend → Railway or Render
 
 **Railway:**
-1. Create a new project at [railway.app](https://railway.app/)
-2. Connect your GitHub repository
-3. Set the **Root Directory** to `backend`
-4. Add all backend environment variables in the Variables panel
-5. Set the **Start Command** to `npm run start`
-6. Deploy
+1. Connect your GitHub repo at [railway.app](https://railway.app)
+2. Set the root to `backend/`
+3. Set the start command: `npm run build && npm start`
+4. Add all backend environment variables
+5. Deploy
 
 **Render:**
-1. Create a new **Web Service** at [render.com](https://render.com/)
-2. Connect your repository and set Root Directory to `backend`
-3. Set Build Command: `npm install && npm run build`
-4. Set Start Command: `npm run start`
-5. Add environment variables in the Environment panel
+1. Create a new **Web Service** at [render.com](https://render.com)
+2. Connect your GitHub repo
+3. Build command: `cd backend && npm install && npm run build`
+4. Start command: `cd backend && npm start`
+5. Add environment variables
 
-### Database — Supabase
+### Database → Supabase
 
-1. Your Supabase PostgreSQL database is provisioned automatically when you create a project
-2. Run Prisma migrations against your production database:
-   ```bash
-   DATABASE_URL=your-production-url npx prisma migrate deploy
-   ```
-3. Enable Row Level Security (RLS) in Supabase if not using service-role key
+1. Create a project at [supabase.com](https://supabase.com)
+2. Navigate to **Settings → Database** and copy the `DATABASE_URL`
+3. Run `npx prisma migrate deploy` to apply migrations to production
+4. Enable **Email Auth** under Authentication settings
 
-### Redis — Upstash
+### Cache → Upstash Redis
 
-1. Create a Redis database at [console.upstash.com](https://console.upstash.com/)
-2. Choose your preferred region (closest to your backend deployment)
-3. Copy the **REST URL** and **REST Token** to your backend environment variables
-4. Upstash Redis is serverless — no further configuration required
+1. Create an account at [upstash.com](https://upstash.com)
+2. Create a new **Redis** database (select the region closest to your backend)
+3. Copy the `REST URL` and `REST Token`
+4. Add them to your production environment variables
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you have ideas for improvements, bug fixes, or new features, please follow these steps:
+Contributions are welcome! Here's how to get started:
 
-1. Fork the repository
-2. Create a new branch: `git checkout -b feature/your-feature-name`
-3. Make your changes and commit: `git commit -m "feat: add your feature"`
-4. Push to your fork: `git push origin feature/your-feature-name`
-5. Open a Pull Request against the `main` branch
+1. **Fork** the repository
+2. Create a new feature branch: `git checkout -b feature/your-feature-name`
+3. Make your changes with clear, descriptive commits
+4. Ensure all existing functionality still works
+5. Open a **Pull Request** with a clear description of your changes
 
-Please follow [Conventional Commits](https://www.conventionalcommits.org/) for commit messages.
+### Code Standards
 
-### Development Guidelines
-
-- All new code must be written in TypeScript
-- Run `npm run lint` before submitting a PR
-- Add or update tests for any changed business logic
-- Update this README if your changes affect setup, architecture, or environment variables
+- All code must be written in **TypeScript**
+- Follow existing naming conventions and file structure
+- Keep components small and focused (single responsibility)
+- Add comments for complex business logic
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**.
 
 ```
 MIT License
 
-Copyright (c) 2024 Sarthak Polshettiwar
+Copyright (c) 2026 Sarthak Polshettiwar
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction...
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 ```
+
+See [LICENSE](./LICENSE) for the full license text.
 
 ---
 
-## 👤 Author
+## 👨‍💻 Author
 
-**Sarthak Polshettiwar**
+<div align="center">
 
-> Building secure, privacy-first infrastructure for the AI era.
+### Sarthak Polshettiwar
 
-[![GitHub](https://img.shields.io/badge/GitHub-sarthakpolshettiwar-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sarthakpolshettiwar)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-sarthakpolshettiwar-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/sarthakpolshettiwar)
+*Full-Stack Developer | Security Enthusiast | Open Source Contributor*
+
+[![GitHub](https://img.shields.io/badge/GitHub-@sarthakpolshettiwar-181717?style=for-the-badge&logo=github)](https://github.com/sarthakpolshettiwar)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Sarthak_Polshettiwar-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/sarthakpolshettiwar)
+
+</div>
 
 ---
 
 <div align="center">
 
-**⭐ If PIIGuard AI helped you, consider starring the repository!**
+**Built with 🛡️ and ❤️ to protect privacy in the age of AI.**
 
-*Built with 🔐 for a safer AI ecosystem.*
+*If this project helped you, consider giving it a ⭐ on GitHub!*
 
 </div>
