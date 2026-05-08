@@ -67,19 +67,21 @@ export function LoginPage({ onLogin, onRegister, redirectTo = '/dashboard' }: Lo
         await onLogin(email, password)
       }
       navigate(redirectTo)
-    } catch (err: unknown) {
-      // Extract error message from API response or native error
+    } catch (err: any) {
       let message = isRegister ? 'Registration failed. Please try again.' : 'Incorrect email or password.'
-      if (err instanceof Error) {
+      
+      if (err?.response?.data?.error) {
+        message = err.response.data.error
+      } else if (err?.response?.status === 409) {
+        message = 'Account already exists. Please sign in.'
+      } else if (err?.message) {
         message = err.message
-      } else if (err && typeof err === 'object' && 'response' in err) {
-        const axiosErr = err as { response?: { data?: { error?: string }; status?: number } }
-        if (axiosErr.response?.data?.error) {
-          message = axiosErr.response.data.error
-        } else if (axiosErr.response?.status === 409) {
-          message = 'An account with this email already exists.'
-        }
       }
+      
+      if (message.includes('status code 409') || message.includes('User already registered')) {
+        message = 'Account already exists. Please sign in.'
+      }
+      
       setError(message)
       triggerShake()
     } finally {
